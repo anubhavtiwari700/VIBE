@@ -1,0 +1,16 @@
+{
+  "name": "vibe-fullstack-root",
+  "version": "1.0.0",
+  "description": "Fullstack project with root-level scripts",
+  "scripts": {
+    "frontend": "npm run dev --prefix frontend",
+    "backend": "npm run dev --prefix backend",
+    "install-all": "npm install --prefix frontend && npm install --prefix backend",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "build": "npm run build --prefix frontend",
+    "start": ".\\start-all.bat"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

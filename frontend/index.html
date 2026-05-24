@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/vibe-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="manifest" href="/manifest.json" /> -->
+    <meta name="theme-color" content="#0a0514" />
+    <title>vibe's</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+
+    <!-- ██ VIBE PROTECTION SYSTEM ██ -->
+    <script>
+      // 1. Disable Right Click
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+
+      // 2. Disable Keyboard Shortcuts (F12, Ctrl+Shift+I/J/C/U, Ctrl+U, Ctrl+S)
+      document.addEventListener('keydown', function(e) {
+        // F12
+        if (e.keyCode === 123) { e.preventDefault(); return false; }
+        // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+          e.preventDefault(); return false;
+        }
+        // Ctrl+U (view source)
+        if (e.ctrlKey && e.keyCode === 85) { e.preventDefault(); return false; }
+        // Ctrl+S (save)
+        if (e.ctrlKey && e.keyCode === 83) { e.preventDefault(); return false; }
+        // Ctrl+C (copy)
+        if (e.ctrlKey && e.keyCode === 67) { e.preventDefault(); return false; }
+        // Ctrl+A (select all)
+        if (e.ctrlKey && e.keyCode === 65) { e.preventDefault(); return false; }
+        // Ctrl+P (print)
+        if (e.ctrlKey && e.keyCode === 80) { e.preventDefault(); return false; }
+      });
+
+      // 3. Disable Drag (image drag)
+      document.addEventListener('dragstart', function(e) {
+        e.preventDefault(); return false;
+      });
+
+      // 4. DevTools Detection - Desktop only
+      (function devToolsDetector() {
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) return;
+        
+        var threshold = 160;
+        var check = function() {
+          if (
+            window.outerWidth - window.innerWidth > threshold ||
+            window.outerHeight - window.innerHeight > threshold
+          ) {
+            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0f0a1e;color:#a855f7;font-family:sans-serif;font-size:24px;font-weight:bold;flex-direction:column;gap:16px"><span style="font-size:60px">🛡️</span><span>Access Denied</span><span style="font-size:14px;color:#666">Developer tools are not permitted on VIBE.</span></div>';
+          }
+        };
+        // Increase interval to 3000ms to reduce CPU impact
+        setInterval(check, 3000);
+      })();
+    </script>
+
+    <style>
+      /* Disable text selection site-wide */
+      * {
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+      }
+      /* Allow text selection inside inputs and textareas */
+      input, textarea, [contenteditable="true"] {
+        -webkit-user-select: text !important;
+        -moz-user-select: text !important;
+        -ms-user-select: text !important;
+        user-select: text !important;
+      }
+    </style>
+    <!-- ██ END PROTECTION ██ -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
