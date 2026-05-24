@@ -45,19 +45,24 @@ app.use(cors({
     origin: (origin, callback) => {
         // Allow requests with no origin (mobile apps, curl, etc.)
         if (!origin) return callback(null, true);
-        
+
         const cleanOrigin = origin.replace(/\/$/, '');
-        
+
         // Allow localhost
         if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(cleanOrigin)) {
             return callback(null, true);
         }
-        
+
+        // If no FRONTEND_URL is configured, allow all origins (open/dev mode)
+        if (!process.env.FRONTEND_URL) {
+            return callback(null, true);
+        }
+
         // Check exact match in allowed list
         if (allowedOrigins.includes(cleanOrigin)) {
             return callback(null, true);
         }
-        
+
         console.warn(`[CORS Blocked] Origin: ${origin}`);
         return callback(new Error(`Origin ${origin} not allowed by CORS policy`));
     },

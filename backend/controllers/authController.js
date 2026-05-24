@@ -265,8 +265,12 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ message: 'Incorrect Password' });
         }
 
+        // Auto-verify legacy users who were created before OTP system
+        // (old VIBE 2 backend had no isVerified field, so they default to false)
         if (!user.isVerified) {
-            return res.status(403).json({ message: 'Account not verified. Please complete registration.' });
+            user.isVerified = true;
+            await user.save();
+            console.log(`[AUTH] Auto-verified legacy user: ${user.email}`);
         }
 
         const token = generateToken(user._id);

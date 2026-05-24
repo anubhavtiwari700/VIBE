@@ -25,7 +25,7 @@ import vibeLogo from '../assets/vibe-logo.png';
 
 const Landing = () => {
   const [isLoginState, setIsLoginState] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '+91 ', password: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '+91 ', password: '', firstName: '', middleName: '', lastName: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
